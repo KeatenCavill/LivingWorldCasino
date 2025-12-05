@@ -5,7 +5,7 @@ import core.NPC;
 
 public class Bartender extends NPC implements Vendor {
     
-    public void displayGoods(Item[] forSale){
+    public void displayGoods(){
 
     }
     public void buyItem(Item item){

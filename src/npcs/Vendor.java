@@ -3,6 +3,6 @@ import core.Item;
 
 
 interface Vendor {
-    void displayGoods(Item[] forSale);
+    void displayGoods();
     void buyItem(Item item);
 }
