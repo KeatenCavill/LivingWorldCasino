@@ -18,6 +18,13 @@ public class Player extends Person {
     public double getMoneyAmount(){return(this.moneyAmount);}
     public void addMoney(double increase){this.moneyAmount = this.moneyAmount + increase;}
 
+    public int getPhoneBattery(){return(this.phoneBattery);}
+    public void chargePhone(int mins){
+        this.phoneBattery = this.phoneBattery + (int)(mins * (100/60));
+        if(this.phoneBattery > 100){this.phoneBattery = 100;}
+        System.out.println("You spent " + mins + " charging your phone and got it up to " + this.phoneBattery + "% charged.");
+    }
+
     void displayStatus(){
 
     }
