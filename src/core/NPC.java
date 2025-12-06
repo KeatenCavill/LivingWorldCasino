@@ -3,39 +3,49 @@ import core.Item;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-// give: inventory, drunk level
-// options: fight, steal from, give, talk to
+// options: fight, steal from, give
 
 public class NPC extends Person {
 
-    private String name;
-    private Item[] inventory;
-    private double drunkness;
+    private List<Item> inventory;
+    private List<String> phrases;
     private double anger;
 
     public NPC(){
-
         try {
             List<String> lines = Files.readAllLines(Path.of("names.txt"));
-            this.name = lines.get(new Random().nextInt(lines.size()));
+            super.name = lines.get(new Random().nextInt(lines.size()));
+            this.phrases = Files.readAllLines(Path.of("bar_npc_dialogues.txt"));
         } 
         catch(Exception err) {err.printStackTrace();}
-        // choose random meter levels
-        
+
+        super.drunkMeter = Math.random();
+        super.grubMeter = Math.random();
+        super.peeMeter = Math.random();
+        this.anger = Math.random();
     }
     
-    public void give(Item item){
+    public void steal(int itemnum, Player player){
+        player.inventoryAdd(this.inventory.get(itemnum));
+        inventory.remove(itemnum);
+    }
 
+    public void give(Player player){
+        int itemnum = (int)(Math.random() * this.inventory.size());
+        Item item = this.inventory.get(itemnum);
+        //System.out.println("Here, take this " + item.getName() + ". You might need it.");
+        player.inventoryAdd(item);
+        inventory.remove(itemnum);
     }
 
     public void talkTo(){
-
+        int messagenum = (int)(Math.random() * this.phrases.size());
+        System.out.println(this.phrases.get(messagenum));
     }
+
+    public void fight(){}
 
 }

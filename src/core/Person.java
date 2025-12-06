@@ -4,9 +4,9 @@ package core;
 public class Person {
     public String name;
     public int age;
-    protected int peeMeter;
-    protected int drunkMeter;
-    protected int grubMeter;
+    protected double peeMeter;
+    protected double drunkMeter;
+    protected double grubMeter;
 
     void consume(Item item){
 
