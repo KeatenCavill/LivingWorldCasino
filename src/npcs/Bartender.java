@@ -8,21 +8,16 @@ import items.*;
 public class Bartender extends NPC implements Vendor {
 
     private List<Item> forSale;
-    private List<Item> GoodsOp;
     
-    private void makeGoodsOptions(){};
-
-    private void populateGoods(int numGoods){
-        for(int i = 0; i < numGoods; i++){
-            int saleNum = (int) (Math.random() * this.GoodsOp.size());
-            Item saleItem = this.GoodsOp.get(saleNum);
-            this.forSale.add(saleItem);
-        }
-    }
+    private void populateGoods(){
+        Beer beer = new Beer(); this.forSale.add(beer);
+        Burger burger = new Burger(); this.forSale.add(burger);
+        Fries fries = new Fries(); this.forSale.add(fries);
+        Soda soda = new Soda(); this.forSale.add(soda);
+    };
 
     public Bartender(){
-        makeGoodsOptions();
-        populateGoods(5);
+        populateGoods();
     }
     
     public void displayGoods(){
@@ -40,8 +35,6 @@ public class Bartender extends NPC implements Vendor {
         int itemnum = item - 1;
         Item purchase = forSale.get(itemnum);
         player.inventoryAdd(purchase);
-        this.forSale.remove(itemnum);
-        populateGoods(1);
         System.out.println(super.name + ": \"Here ya go!\"");
 
     }
