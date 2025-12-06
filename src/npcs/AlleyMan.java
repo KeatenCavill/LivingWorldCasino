@@ -1,22 +1,28 @@
 package npcs;
+import java.util.List;
+
 import core.Item;
 import core.NPC;
+import core.Player;
 
 
 public class AlleyMan extends NPC implements Vendor {
 
-    private Item[] forSale = new Item[5];
-    private Item[] GoodsOp = new Item[] {};
+    private List<Item> forSale;
+    private List<Item> GoodsOp;
+
+    private void makeGoodsOptions(){};
 
     private void populateGoods(){
-        for(int i = 0; i < 4; i++){
-            int saleNum = (int) (Math.random() * this.GoodsOp.length);
-            Item saleItem = this.GoodsOp[saleNum];
-            this.forSale[i] = saleItem;
+        for(int i = 0; i < 5; i++){
+            int saleNum = (int) (Math.random() * this.GoodsOp.size());
+            Item saleItem = this.GoodsOp.get(saleNum);
+            this.forSale.add(saleItem);
         }
     }
 
     public AlleyMan(){
+        makeGoodsOptions();
         populateGoods();
     }
     
@@ -28,7 +34,7 @@ public class AlleyMan extends NPC implements Vendor {
             inc ++;
         }
     }
-    public void buyItem(Item item){
+    public void buyItem(int item, Player player){
 
     }
 }
