@@ -46,6 +46,28 @@ public class NPC extends Person {
         System.out.println(this.phrases.get(messagenum));
     }
 
-    public void fight(){}
+    public void fight(Player player){
+        if(super.peeMeter >= 0.75){
+            System.out.println(super.name + ": \"I don't want to fight! I'm gonna pee myself!\"");
+            System.out.println(super.name + " has run away in the direction of the bathroom.");
+        } else if(super.drunkMeter >= 0.5){
+            System.out.println(super.name + " swings at you but misses and faceplants on the ground. Their friend calls them an Uber home.");
+        } else if(this.anger >= -.5){
+            System.out.println("You and " + super.name + " get into a big fight!");
+            double noticed = Math.random();
+            double win = Math.random();
+            double reward = (double) (Math.random() * player.getMoneyAmount());
+            if(noticed > 0.9){} //get kicked out?
+            if(win >= 0.3){
+                System.out.println("You beat " + this.name + " in a fight!");
+                System.out.println("They gave you $" + reward + " to leave them alone.");
+                player.addMoney(reward);
+            } else {
+                System.out.println(this.name + " beat you in a fight! :(");
+                System.out.println("They stole $" + reward + " out of your wallet.");
+                player.addMoney(-1 * reward);
+            }
+        }
+    }
 
 }
