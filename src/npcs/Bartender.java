@@ -11,8 +11,6 @@ public class Bartender extends NPC implements Vendor {
     
     private void populateGoods(){
         Beer beer = new Beer(); this.forSale.add(beer);
-        Burger burger = new Burger(); this.forSale.add(burger);
-        Fries fries = new Fries(); this.forSale.add(fries);
         Soda soda = new Soda(); this.forSale.add(soda);
     };
 
