@@ -13,8 +13,8 @@ public class AlleyMan extends NPC implements Vendor {
 
     private void makeGoodsOptions(){};
 
-    private void populateGoods(){
-        for(int i = 0; i < 5; i++){
+    private void populateGoods(int numGoods){
+        for(int i = 0; i < numGoods; i++){
             int saleNum = (int) (Math.random() * this.GoodsOp.size());
             Item saleItem = this.GoodsOp.get(saleNum);
             this.forSale.add(saleItem);
@@ -23,18 +23,27 @@ public class AlleyMan extends NPC implements Vendor {
 
     public AlleyMan(){
         makeGoodsOptions();
-        populateGoods();
+        populateGoods(5);
     }
     
     public void displayGoods(){
+        System.out.println(super.name + ": Aight, this here's what I got to gives ya. See anything you like?");
         int inc = 1;
+        /*
         for(Item item : this.forSale){
-            String message = inc + ") " + item;
+            String message = inc + ") " + item.getName() + " : $" + item.getMonetaryValue();
             System.out.println(message);
             inc ++;
         }
+        */
     }
     public void buyItem(int item, Player player){
+        int itemnum = item - 1;
+        Item purchase = forSale.get(itemnum);
+        player.inventoryAdd(purchase);
+        this.forSale.remove(itemnum);
+        populateGoods(1);
+        // System.out.println("Ah, that there " + purchase.getName() + " is top of the line. I'm giving you a steal!");
 
     }
 }
