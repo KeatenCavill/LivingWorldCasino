@@ -28,8 +28,8 @@ public class AlleyMan extends NPC implements Vendor {
     
     public void displayGoods(){
         System.out.println(super.name + ": Aight, this here's what I got to gives ya. See anything you like?");
-        int inc = 1;
         /*
+        int inc = 1;
         for(Item item : this.forSale){
             String message = inc + ") " + item.getName() + " : $" + item.getMonetaryValue();
             System.out.println(message);
