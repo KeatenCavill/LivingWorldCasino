@@ -5,8 +5,6 @@ import java.util.Random;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-// options: fight, steal from, give
-
 public class NPC extends Person {
 
     private List<Item> inventory;
@@ -35,7 +33,7 @@ public class NPC extends Person {
     public void give(Player player){
         int itemnum = (int)(Math.random() * this.inventory.size());
         Item item = this.inventory.get(itemnum);
-        //System.out.println("Here, take this " + item.getName() + ". You might need it.");
+        // System.out.println("Here, take this " + item.getName() + ". You might need it.");
         player.inventoryAdd(item);
         inventory.remove(itemnum);
     }
@@ -56,7 +54,7 @@ public class NPC extends Person {
             double noticed = Math.random();
             double win = Math.random();
             double reward = (double) (Math.random() * player.getMoneyAmount());
-            if(noticed > 0.9){} //get kicked out?
+            if(noticed > 0.9){} // get kicked out?
             if(win >= 0.3){
                 System.out.println("You beat " + this.name + " in a fight!");
                 System.out.println("They gave you $" + reward + " to leave them alone.");
