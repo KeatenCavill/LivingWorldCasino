@@ -22,6 +22,7 @@ public class NPC extends Person {
         super.drunkMeter = Math.random();
         super.grubMeter = Math.random();
         super.peeMeter = Math.random();
+        super.age = (int)(Math.random() * 29) + 21;
         this.anger = Math.random();
     }
     
