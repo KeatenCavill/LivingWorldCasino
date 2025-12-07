@@ -1,7 +1,7 @@
 package items;
-
+import core.Person;
 
 
 interface Consumable {
-    void consume();    
+    void consume(Person user);    
 }

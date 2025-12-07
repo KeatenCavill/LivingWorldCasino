@@ -1,18 +1,94 @@
 package core;
-
+import items.Consumable;
 
 public class Person {
     public String name;
     public int age;
+
     protected double peeMeter;
     protected double drunkMeter;
     protected double grubMeter;
+    protected double thirstMeter;
 
-    void consume(Item item){
+    protected  int happiness;
+    protected int aggression;
+    protected int awareness;
 
+    protected Environment location;
+    protected final List<Item> inventory = new ArrayList<>();
+
+    private double clamp(double value, double min, double max){
+        if (value<min) return min;
+        if (value>max) return max;
+        return value;
     }
 
-    void relieveOneSelf(){
+    public Person(String name, int age){
+        this.name = name;
+        this.age = age;
+    }
 
+    void setLocation(Environment env){
+        this.location = env;
+    }
+
+    public void pickUp(String itemName){
+        if (location == null) return;
+
+        Optional<Item> maybe = location.TakeItemByName(itemName);
+        if (maybe.isPresent()){
+            Itme item = maybe.get();
+            System.out.println(name + " picked up " + item.getName() + ".");
+        } else {
+            System.out.println("No " + itemName + " found here.");
+        }
+    }
+    void consume(Item item){
+        if (item instanceof Consumable){
+            ((Consumable) item).consume(this);
+        }
+    }
+
+    public void changeDrunk(double delta) { drunkMeter = clamp(drunkMeter + delta, 0, 100); }
+    public void changePee(double delta) { peeMeter = clamp(peeMeter + delta, 0, 100); }
+    public void changeGrub(double delta) { grubMeter = clamp(grubMeter + delta, 0, 100); }
+    public void changeThirst(double delta) { thirstMeter = clamp(thirstMeter + delta, 0, 100); }
+
+    public void changeHappieness(double delta) { happiness = clamp(happiness + delta, 0, 100); }
+    public void changeAggression(double delta) { aggression = clamp(aggression + delta, 0, 100); }
+    public void changeAwareness(double delta) { awareness = clamp(awareness + delta, 0, 100); }
+
+    public List<Item> getInventory(){
+     return Collections.unmodifiableList(inventory); 
+    }
+    
+    void relieveOneSelf(){
+        peeMeter = 0;
+        System.out.println(name + " has relieved themselves.");
+    }
+
+    public double getPeeMeter(){ return peeMeter; }
+    public double getDrunkMeter(){ return drunkMeter; }
+    public double getGrubMeter(){ return grubMeter; }
+    public double getThirstMeter(){ return thirstMeter; }
+    public double getHappiness(){ return happiness; }
+    public double getAggression(){ return aggression; }
+    public double getAwareness(){ return awareness; }
+
+    public double getStealDifficulty(){
+        double difficulty = 0;
+        difficulty -= drunkMeter * 0.5;
+        difficulty += awareness * 0.3;
+        difficulty += awareness * 0.8;
+        return clamp(difficulty, 0, 100);
+    }
+
+    public int getFightLikelihood(){
+        double chance = 0;
+
+        chance += drunkMeter * 0.6;
+        chance += aggression * 0.7;
+        chance -= happiness * 0.4;
+        return clamp(chance, 0, 100);
     }
 }

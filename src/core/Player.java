@@ -8,8 +8,10 @@ public class Player extends Person {
     private double moneyAmount;
     private List<Item> inventory;
 
-    Player(int difficulty){
-
+    public Player(String name, int age, double money){
+        super(name, age);
+        this.phoneBattery = 100;
+        this.moneyAmount = money;
     }
 
     public void inventoryAdd(Item item){this.inventory.add(item);}
@@ -26,11 +28,28 @@ public class Player extends Person {
     }
 
     void displayStatus(){
+        System.out.printf(
+            "%s | Hunger : %d Drunk: %d Pee: %d Money: $%.2f%n",
+            name, grubMeter, drunkMeter, peeMeter, moneyAmount
+        );
 
     }
 
     void displayInventory(){
+        System.out.println("Inventory:");
+        for (Item item : inventory) {
+            System.out.println("- " + item.getName());
+        }
 
     }
+
+    public void changeMoney(double delta) {
+        this.moneyAmount += delta;
+    }
+
+    public double getMoney(){
+        return this.moneyAmount;
+    }
+    
 
 }
