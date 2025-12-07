@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Random;
+import core.Player;
 
 public class Singer extends NPC {
     
@@ -69,6 +70,12 @@ public class Singer extends NPC {
         if(this.skill > 1){
             this.skill = 1;
         }
+    }
+
+    public void steal(Player player){
+        double theftAmount = Math.random() * this.earnings;
+        System.out.println("You shove your hand into " + super.name + "'s tip jar when they aren't looking and make out with $" + theftAmount + ".");
+        System.out.println("Shame on you!");
     }
 
 }
