@@ -7,9 +7,9 @@ import java.nio.file.Path;
 
 public class NPC extends Person {
 
-    private List<Item> inventory;
-    private List<String> phrases;
-    private double anger;
+    protected List<Item> inventory;
+    protected List<String> phrases;
+    protected double anger;
 
     public NPC(){
         try {
