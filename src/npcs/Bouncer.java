@@ -35,9 +35,14 @@ public class Bouncer extends NPC {
         }
     }
 
-    public void bribe(){
-        this.kicked = false;
-        System.out.println(super.name + ": \"You're good. Don't mention this, ya hear?\"");
+    public void bribe(double bribeAmount){
+        if(super.anger > 0.6 && bribeAmount < 50){
+            System.out.println(super.name + ": \"What, you think I can be bought with $" + bribeAmount + "?? You're BANNED!");
+            System.out.println(super.name + " shoves you away from the building by your shoulder!");
+        } else{
+            this.kicked = false;
+            System.out.println(super.name + ": \"You're good. Don't mention this, ya hear?\"");
+        }
     }
 
 }
