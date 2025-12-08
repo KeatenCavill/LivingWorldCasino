@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
+import envs.*;
 
 public class Person {
     public String name;
@@ -14,9 +14,9 @@ public class Person {
     protected double grubMeter;
     protected double thirstMeter;
 
-    protected  int happiness;
-    protected int aggression;
-    protected int awareness;
+    protected double happiness;
+    protected double aggression;
+    protected double awareness;
 
     protected Environment location;
     protected final List<Item> inventory = new ArrayList<>();
@@ -63,9 +63,16 @@ public class Person {
     }
     
     public void relieveOneSelf(){
-        peeMeter = 0;
-        System.out.println(name + " has relieved themselves.");
-    }
+        if(this.location instanceof Bathroom){
+            this.peeMeter = 0;
+            System.out.println(this.name + " has relieved themselves.");
+        } else if(this.location instanceof Alley || this.location instanceof FrontSidewalk){
+            this.peeMeter = 0;
+            System.out.println(this.name + " has relieved themselves.");
+        } else {
+            System.out.println(this.name + "has tried to relieve themselves in the " + this.location + ".");
+            System.out.println("A passersby yelled at them: \"Ew! You can't do that here!\"");}
+        }
 
     public double getPeeMeter(){ return peeMeter; }
     public double getDrunkMeter(){ return drunkMeter; }
@@ -83,7 +90,7 @@ public class Person {
         return clamp(difficulty, 0, 100);
     }
 
-    public int getFightLikelihood(){
+    public double getFightLikelihood(){
         double chance = 0;
 
         chance += drunkMeter * 0.6;
