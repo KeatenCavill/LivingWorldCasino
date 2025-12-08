@@ -1,7 +1,6 @@
 package envs;
 
 import core.Environment;
-import core.NPC;
 import core.Person;
 import items.WeirdPill;
 import core.Player;

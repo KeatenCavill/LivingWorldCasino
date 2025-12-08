@@ -9,9 +9,9 @@ public class Environment {
     String name;
     String entranceMessage;
     
-    private final List<Environment> connnectedAreas = new ArrayList<>();
-    private final List<Person> people = new ArrayList<>();
-    private final List<Item> items = new ArrayList<>();
+    public final List<Environment> connnectedAreas = new ArrayList<>();
+    public final List<Person> people = new ArrayList<>();
+    public final List<Item> items = new ArrayList<>();
 
     protected Environment(String name, String entranceMessage){
         this.name = name;
@@ -91,6 +91,19 @@ public class Environment {
     protected void addPeople(Person... persons){
         if (persons == null) return;
         for (Person p : persons) addPerson(p);
+    }
+
+    /**
+     * Allow subclasses to add items to this environment during initialization.
+     */
+    protected void addItem(Item item){
+        if (item == null) return;
+        items.add(item);
+    }
+
+    protected void addItems(Item... things){
+        if (things == null) return;
+        for (Item it : things) addItem(it);
     }
 
     public List<Environment> getConnectedAreas(){
