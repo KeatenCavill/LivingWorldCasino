@@ -47,9 +47,11 @@ public class Singer extends NPC {
     public void requestSong(String SongOP){
         if(this.earnings < 10 || Math.random() > 0.9){
             changeSong();
+            System.out.println(super.name + " starts singing " + this.song + " and gives you a dirty look.");
         } else {
             this.setlist.add(SongOP);
             this.song = SongOP;
+            System.out.println(super.name + " starts singing " + SongOP + ". The song you requested!");
         }
     }
 
@@ -70,6 +72,7 @@ public class Singer extends NPC {
         if(this.skill > 1){
             this.skill = 1;
         }
+        System.out.println(super.name + " gives you a smile and starts singing with a little more emotion.");
     }
 
     public void steal(Player player){

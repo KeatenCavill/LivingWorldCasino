@@ -38,11 +38,9 @@ public class StreetPerformer extends NPC {
     }
 
     public void tip(double tip){
-        this.earnings = this.earnings + tip;
-        this.skill = this.skill + (tip / 100);
-        if(this.skill > 1){
-            this.skill = 1;
-        }
+        this.earnings += tip;
+        this.skill = super.clamp(this.skill + (tip / 100), 0, 1);
+        System.out.println(super.name + " grins at you. Their act seems more enthusiastic now!");
     }
 
     public void steal(Player player){
@@ -53,7 +51,7 @@ public class StreetPerformer extends NPC {
             System.out.println("You shove your hand into " + super.name + "'s tip jar when they aren't looking and make out with $" + theftAmount + ".");
             System.out.println("Shame on you!");
         } else {
-            System.out.println(super.name + " never looked away long enough for you to snatch anything. They were staring right. At you.");
+            System.out.println(super.name + " never looked away long enough for you to snatch anything. They were staring right. At. You.");
         }
     }
 }
