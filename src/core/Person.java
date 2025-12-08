@@ -3,9 +3,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import items.Consumable;
-import java.util.List;
-import java.util.ArrayList;
 import envs.*;
 
 public class Person {
