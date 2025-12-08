@@ -28,15 +28,14 @@ public class AlleyMan extends NPC implements Vendor {
     
     public void displayGoods(){
         System.out.println(super.name + ": \"Aight, this here's what I got to gives ya. See anything you like?\"");
-        /*
         int inc = 1;
         for(Item item : this.forSale){
             String message = inc + ") " + item.getName() + " : $" + item.getMonetaryValue();
             System.out.println(message);
             inc ++;
         }
-        */
     }
+    
     public void buyItem(int item, Player player){
         int itemnum = item - 1;
         Item purchase = forSale.get(itemnum);
@@ -44,7 +43,7 @@ public class AlleyMan extends NPC implements Vendor {
         player.addMoney((-1) * purchase.getMonetaryValue());
         this.forSale.remove(itemnum);
         populateGoods(1);
-        // System.out.println(super.name + ": \"Ah, that there " + purchase.getName() + " is top of the line. I'm giving you a steal!\"");
+        System.out.println(super.name + ": \"Ah, that there " + purchase.getName() + " is top of the line. I'm giving you a steal!\"");
 
     }
 }

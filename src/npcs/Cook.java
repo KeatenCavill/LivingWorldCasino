@@ -23,15 +23,14 @@ public class Cook extends NPC implements Vendor {
     
     public void displayGoods(){
         System.out.println(super.name + ": \"What do you want to eat tonight?\"");
-        /*
         int inc = 1;
         for(Item item : this.forSale){
             String message = inc + ") " + item.getName() + " : $" + item.getMonetaryValue();
             System.out.println(message);
             inc ++;
         }
-        */
     }
+    
     public void buyItem(int item, Player player){
         int itemnum = item - 1;
         Item purchase = forSale.get(itemnum);
