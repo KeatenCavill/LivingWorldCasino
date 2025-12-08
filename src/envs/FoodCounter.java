@@ -10,8 +10,7 @@ import items.Soda;
 public class FoodCounter extends Environment {
 
     public FoodCounter() {
-        this.name = "Food Counter";
-        this.entranceMessage = "You walk up to the food counter. It smells like fried everything.";
+        super("Food Counter", "You walk up to the food counter. It smells like fried everything.");
     }
 
     @Override

@@ -1,4 +1,8 @@
 package core;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import items.Consumable;
 import java.util.List;
 import java.util.ArrayList;
@@ -40,26 +44,22 @@ public class Person {
 
         Optional<Item> maybe = location.TakeItemByName(itemName);
         if (maybe.isPresent()){
-            Itme item = maybe.get();
+            Item item = maybe.get();
             System.out.println(name + " picked up " + item.getName() + ".");
         } else {
             System.out.println("No " + itemName + " found here.");
         }
     }
-    void consume(Item item){
-        if (item instanceof Consumable){
-            ((Consumable) item).consume(this);
-        }
-    }
+    
 
     public void changeDrunk(double delta) { drunkMeter = clamp(drunkMeter + delta, 0, 100); }
     public void changePee(double delta) { peeMeter = clamp(peeMeter + delta, 0, 100); }
     public void changeGrub(double delta) { grubMeter = clamp(grubMeter + delta, 0, 100); }
     public void changeThirst(double delta) { thirstMeter = clamp(thirstMeter + delta, 0, 100); }
 
-    public void changeHappieness(double delta) { happiness = clamp(happiness + delta, 0, 100); }
-    public void changeAggression(double delta) { aggression = clamp(aggression + delta, 0, 100); }
-    public void changeAwareness(double delta) { awareness = clamp(awareness + delta, 0, 100); }
+    public void changeHappieness(double delta) { happiness = (int) clamp(happiness + delta, 0, 100); }
+    public void changeAggression(double delta) { aggression = (int) clamp(aggression + delta, 0, 100); }
+    public void changeAwareness(double delta) { awareness = (int) clamp(awareness + delta, 0, 100); }
 
     public List<Item> getInventory(){
      return Collections.unmodifiableList(inventory); 
@@ -99,6 +99,6 @@ public class Person {
         chance += drunkMeter * 0.6;
         chance += aggression * 0.7;
         chance -= happiness * 0.4;
-        return clamp(chance, 0, 100);
+        return (int) clamp(chance, 0, 100);
     }
 }

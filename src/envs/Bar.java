@@ -1,5 +1,6 @@
 package envs;
 import core.Environment;
+import core.NPC;
 import core.Person;
 import core.Player;
 import items.Beer;
@@ -8,11 +9,10 @@ import npcs.Bartender;
 
 public class Bar extends Environment {
     public Bar() {
-        this.name = "Bar";
-        this.description = "You step into the lively bar filled with the hum of conversation and clinking glasses. The scent of ale and spirits fills the air, and a bartender stands ready to serve.";
+        super("Bar", "You step into the lively bar filled with the hum of conversation and clinking glasses. The scent of ale and spirits fills the air, and a bartender stands ready to serve.");
 
         Bartender bartender = new Bartender();
-        this.people = new NPC[]{bartender};
+        addPerson(bartender);
     }
 
     @Override

@@ -5,9 +5,7 @@ import core.Person;
 
 public class Burger extends Item implements Consumable{
     public Burger(){
-        this.name = "Burger";
-        this.description = "A juicy beef burger with lettuce, tomato, and cheese.";
-        this.monetaryValue = 15.0;
+        super("Burger", "A juicy beef burger with lettuce, tomato, and cheese.", 15.0);
     }
 
     @Override

@@ -1,12 +1,16 @@
 package core;
 
+import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Environment {
     String name;
     String entranceMessage;
     
     private final List<Environment> connnectedAreas = new ArrayList<>();
-    private final List<NPC> people = new ArrayList<>();
+    private final List<Person> people = new ArrayList<>();
     private final List<Item> items = new ArrayList<>();
 
     protected Environment(String name, String entranceMessage){
@@ -22,47 +26,71 @@ public class Environment {
     }
 
     public void enter(Person person){
-        if (!people.contains(person)){
-            people.add((NPC) person);
-            person.setLocation(this);
-            System.out.println(entranceMessage);
+        if (person == null) return;
+
+        // If person is already in another environment, remove them from there first
+        if (person.location != null && person.location != this){
+            person.location.leave(person);
         }
 
+        if (!people.contains(person)){
+            people.add(person);
+        }
+
+        person.setLocation(this);
+        System.out.println(entranceMessage);
     }
 
     public void stay(Person person){
-        // Logic for when a person stays in the environment
-        // if they are on the dance floor for too long they will get tired
+       
     }
 
     public void leave(Person person){
         people.remove(person);
     }
 
-    public void moveTo(Environment target){
-        if (location != null){
-            location.exit(this);
+    public void moveTo(Person person, Environment target){
+        if (person == null || target == null) return;
+
+        // Remove person from their current location if present
+        if (person.location != null){
+            person.location.leave(person);
         }
-        location = target;
-        target.enter(this);
+
+        // Enter the target environment
+        target.enter(person);
     }
 
-    public Option<Item> TakeItemByName(String name){
+    public Optional<Item> TakeItemByName(String name){
         for (Item item : items) {
             if (item.getName().equalsIgnoreCase(name)) {
                 items.remove(item);
-                return Option.of(item);
+                return Optional.of(item);
             }
         }
-        return Option.none();
+        return Optional.empty();
     }
 
     public List<Item> getItems(){
         return Collections.unmodifiableList(items);
     }
 
-    public List<NPC> getPeople(){
+    public List<Person> getPeople(){
         return Collections.unmodifiableList(people);
+    }
+
+
+    protected void addPerson(Person person){
+        if (person == null) return;
+        if (!people.contains(person)){
+            people.add(person);
+            person.setLocation(this);
+        }
+    }
+
+    protected void addPeople(Person... persons){
+        if (persons == null) return;
+        for (Person p : persons) addPerson(p);
     }
 
     public List<Environment> getConnectedAreas(){
@@ -81,5 +109,6 @@ public class Environment {
             System.out.println("- " + i.getName());
         }
     }
+}
 
   

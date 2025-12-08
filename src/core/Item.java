@@ -21,4 +21,9 @@ public class Item {
         void consume(Person consumer);
     }
 
+    public void consume(Person person) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'consume'");
+    }
+
 }

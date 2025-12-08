@@ -1,18 +1,18 @@
 package envs;
 
 import core.Environment;
-import core.Person:
+import core.NPC;
+import core.Person;
 import items.WeirdPill;
 import core.Player;
 import npcs.AlleyMan;
 
 public class Alley extends Environment {
     public Alley(){
-        this.name = "Alley";
-        this.description = "You find yourself in a dimly lit alleyway, with trash cans lining the walls and a faint smell of dampness in the air. There appears to be a man sitting against the wall.";
+        super("Alley", "You find yourself in a dimly lit alleyway, with trash cans lining the walls and a faint smell of dampness in the air. There appears to be a man sitting against the wall.");
     
         AlleyMan alleyMan = new AlleyMan();
-        this.people = new NPC[]{alleyMan};
+        addPerson(alleyMan);
     }
 
     @Override
