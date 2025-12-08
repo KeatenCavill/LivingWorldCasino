@@ -101,6 +101,6 @@ public class Person {
         chance += drunkMeter * 0.6;
         chance += aggression * 0.7;
         chance -= happiness * 0.4;
-        return (int) clamp(chance, 0, 100);
+        return (double)(clamp(chance, 0, 100));
     }
 }

@@ -30,8 +30,14 @@ public class NPC extends Person {
     public List<Item> getInventory(){return(this.inventory);}
     
     public void steal(int itemnum, Player player){
-        player.inventoryAdd(this.inventory.get(itemnum));
-        inventory.remove(itemnum);
+        if(super.getStealDifficulty() < Math.random()){
+            player.inventoryAdd(this.inventory.get(itemnum));
+            this.inventory.remove(itemnum);
+        } else {
+            System.out.println(super.name + ": \"Hey! What are you doing?\"");
+            System.out.println("You quickly flee.");
+            this.anger = clamp(this.anger + 0.1, 0, 1);
+        }
     }
 
     public void give(Player player){
