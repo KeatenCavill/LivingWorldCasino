@@ -62,7 +62,7 @@ public class Person {
      return Collections.unmodifiableList(inventory); 
     }
     
-    void relieveOneSelf(){
+    public void relieveOneSelf(){
         if(this.location instanceof Bathroom){
             this.peeMeter = 0;
             System.out.println(this.name + " has relieved themselves.");
