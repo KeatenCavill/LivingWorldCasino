@@ -4,6 +4,7 @@ import java.util.List;
 import core.Item;
 import core.NPC;
 import core.Player;
+import items.*;
 
 
 public class AlleyMan extends NPC implements Vendor {
@@ -11,7 +12,19 @@ public class AlleyMan extends NPC implements Vendor {
     private List<Item> forSale;
     private List<Item> GoodsOp;
 
-    private void makeGoodsOptions(){};
+    private void makeGoodsOptions(){
+        HalfEatenBurger sketchyFood = new HalfEatenBurger();
+        WeirdPill drugs = new WeirdPill();
+        Beer beer = new Beer();
+        Shot shot = new Shot();
+        Soda soda = new Soda();
+        
+        this.GoodsOp.add(sketchyFood);
+        this.GoodsOp.add(drugs);
+        this.GoodsOp.add(beer);
+        this.GoodsOp.add(shot);
+        this.GoodsOp.add(soda);
+    };
 
     private void populateGoods(int numGoods){
         for(int i = 0; i < numGoods; i++){
@@ -23,7 +36,7 @@ public class AlleyMan extends NPC implements Vendor {
 
     public AlleyMan(){
         makeGoodsOptions();
-        populateGoods(5);
+        populateGoods(3);
     }
     
     public void displayGoods(){
@@ -35,7 +48,7 @@ public class AlleyMan extends NPC implements Vendor {
             inc ++;
         }
     }
-    
+
     public void buyItem(int item, Player player){
         int itemnum = item - 1;
         Item purchase = forSale.get(itemnum);
