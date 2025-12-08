@@ -1,7 +1,5 @@
 package core;
 
-import java.util.List;
-
 public class Player extends Person {
 
     private int phoneBattery;

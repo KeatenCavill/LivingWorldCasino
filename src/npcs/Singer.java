@@ -47,7 +47,7 @@ public class Singer extends NPC {
     public void requestSong(String SongOP){
         if(this.earnings < 10 || Math.random() > 0.9){
             changeSong();
-            System.out.println(super.name + " starts singing " + this.song + " and gives you a dirty look.");
+            System.out.println(super.name + " starts singing " + this.song + " and completely ignores you.");
         } else {
             this.setlist.add(SongOP);
             this.song = SongOP;
