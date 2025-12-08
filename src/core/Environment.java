@@ -1,9 +1,6 @@
 package core;
 
-import java.util.Optional;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Environment {
     String name;
