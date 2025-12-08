@@ -41,6 +41,7 @@ public class AlleyMan extends NPC implements Vendor {
         int itemnum = item - 1;
         Item purchase = forSale.get(itemnum);
         player.inventoryAdd(purchase);
+        player.addMoney((-1) * purchase.getMonetaryValue());
         this.forSale.remove(itemnum);
         populateGoods(1);
         // System.out.println(super.name + ": \"Ah, that there " + purchase.getName() + " is top of the line. I'm giving you a steal!\"");

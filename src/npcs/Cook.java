@@ -36,6 +36,7 @@ public class Cook extends NPC implements Vendor {
         int itemnum = item - 1;
         Item purchase = forSale.get(itemnum);
         player.inventoryAdd(purchase);
+        player.addMoney((-1) * purchase.getMonetaryValue());
         System.out.println(super.name + ": \"Order up!\"");
 
     }
