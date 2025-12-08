@@ -8,7 +8,7 @@ public class DanceFloor extends Environment {
     private int turnsOnFloor = 0;
 
     public DanceFloor() {
-        super("Dance Floor", "You step onto the pulsing dance floor."); // Call the superclass constructor with appropriate arguments
+        super("Dance Floor", "You step onto the pulsing dance floor.");
         
         Singer singer = new Singer();
         addPerson(singer);

@@ -18,7 +18,7 @@ public class Bathroom extends Environment {
         double need = player.getPeeMeter();
 
         if (need <= 5) {
-            System.out.println("You don’t really have to go, but you wash your hands anyway.");
+            System.out.println("You don’t really have to go, but you wash your hands anyway, good job.");
             // small positive mood bump for being clean, good job for washing your hands in a place like this
             player.changeHappieness(2);
         } else {
