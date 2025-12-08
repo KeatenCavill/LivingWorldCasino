@@ -24,7 +24,7 @@ public class Person {
     public void move(Environment newlocation){
         this.location = newlocation;
     }
-    public Environment getLocation(){return(this.location)}
+    public Environment getLocation(){return(this.location);}
 
     public double clamp(double value, double min, double max){
         if (value<min) return min;
