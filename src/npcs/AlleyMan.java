@@ -1,4 +1,6 @@
 package npcs;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import core.Item;
@@ -11,6 +13,7 @@ public class AlleyMan extends NPC implements Vendor {
 
     private List<Item> forSale;
     private List<Item> GoodsOp;
+    private List<String> greetings;
 
     private void makeGoodsOptions(){
         HalfEatenBurger sketchyFood = new HalfEatenBurger(); this.GoodsOp.add(sketchyFood);
@@ -30,7 +33,14 @@ public class AlleyMan extends NPC implements Vendor {
 
     public AlleyMan(){
         makeGoodsOptions();
-        populateGoods(3);
+        populateGoods(3);try {
+            this.greetings = Files.readAllLines(Path.of("vendor_greetings.txt"));
+        } catch(Exception err) {err.printStackTrace();}
+    }
+
+    public void talkTo(){
+        int greetingNum = (int)(Math.random() * this.greetings.size());
+        System.out.println(this.greetings.get(greetingNum));
     }
     
     public void displayGoods(){
