@@ -13,17 +13,16 @@ public class NPC extends Person {
     protected double anger;
 
     public NPC(){
+
+        super(getRandomName(), getRandomAge());
+
         try {
-            List<String> lines = Files.readAllLines(Path.of("names.txt"));
-            super.name = lines.get(new Random().nextInt(lines.size()));
             this.phrases = Files.readAllLines(Path.of("bar_npc_dialogues.txt"));
-        } 
-        catch(Exception err) {err.printStackTrace();}
+        } catch(Exception err) {err.printStackTrace();}
 
         super.drunkMeter = Math.random();
         super.grubMeter = Math.random();
         super.peeMeter = Math.random();
-        super.age = (int)(Math.random() * 29) + 21;
         this.anger = Math.random();
     }
     
@@ -68,6 +67,20 @@ public class NPC extends Person {
             }
             if(noticed > 0.9){bouncer.kickOut();}
         }
+    }
+
+    private static String getRandomName(){
+    String name = "temp";
+        try {
+            List<String> lines = Files.readAllLines(Path.of("names.txt"));
+            name = lines.get(new Random().nextInt(lines.size()));
+        } 
+        catch(Exception err) {err.printStackTrace();}
+        return name;}
+
+    private static int getRandomAge(){
+        int age = (int)(Math.random() * 29) + 21;
+        return(age);
     }
 
 }
