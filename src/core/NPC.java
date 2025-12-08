@@ -18,7 +18,15 @@ public class NPC extends Person {
         super(getRandomName(), getRandomAge());
 
         try {
-            this.phrases = Files.readAllLines(Path.of("bar_npc_dialogues.txt"));
+            this.phrases = Files.readAllLines(Path.of("messages/bar_npc_dialogues.txt"));
+            if(super.peeMeter > 0.8){
+                List<String> newlines = (Files.readAllLines(Path.of("messages/pee_messages.txt")));
+                for(int i = 0; i < newlines.size(); i++){this.phrases.add(newlines.get(i));}
+            }
+            if(super.drunkMeter > 0.8){
+                List<String> newlines = (Files.readAllLines(Path.of("messages/drunk_messages.txt")));
+                for(int i = 0; i < newlines.size(); i++){this.phrases.add(newlines.get(i));}
+            }
         } catch(Exception err) {err.printStackTrace();}
 
         super.drunkMeter = Math.random();
