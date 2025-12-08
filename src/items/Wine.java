@@ -1,7 +1,6 @@
 package items;
 
-import core.Item;
-import core.Person;
+import core.*;
 
 public class Wine extends Item implements Consumable {
     public Wine() {

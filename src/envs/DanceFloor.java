@@ -1,8 +1,6 @@
 package envs;
 
-import core.Environment;
-import core.Person;
-import core.Player;
+import core.*;
 import npcs.Singer;
 
 public class DanceFloor extends Environment {
@@ -50,10 +48,21 @@ public class DanceFloor extends Environment {
     }
 
     public void listenToSinger(Player player){
-        Object singer = null;
-        if (singer == null){
+        // Find the first Singer present in this environment
+        Singer found = null;
+        for (Person p : getPeople()){
+            if (p instanceof Singer){
+                found = (Singer) p;
+                break;
+            }
+        }
+
+        if (found == null){
             System.out.println("There's no singer here right now.");
             return;
         }
+
+        // Let the singer announce what they're playing (method also prints)
+        found.getSong();
     }
 }

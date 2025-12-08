@@ -1,7 +1,6 @@
 package items;
 
-import core.Person;
-
+import core.*;
 
 public interface Consumable {
     void consume(Person user);    

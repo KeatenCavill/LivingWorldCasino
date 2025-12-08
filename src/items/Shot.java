@@ -1,7 +1,6 @@
 package items;
 
-import core.Item;
-import core.Person;
+import core.*;
 
 public class Shot extends Item implements Consumable {
     public Shot() {

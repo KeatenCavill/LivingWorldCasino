@@ -6,7 +6,7 @@ public class Player extends Person {
 
     private int phoneBattery;
     private double moneyAmount;
-    private List<Item> inventory;
+    
 
     public Player(String name, int age, double money){
         super(name, age);
@@ -14,8 +14,8 @@ public class Player extends Person {
         this.moneyAmount = money;
     }
 
-    public void inventoryAdd(Item item){this.inventory.add(item);}
-    public void inventoryRemove(Item item){this.inventory.remove(item);}
+    public void inventoryAdd(Item item){ this.inventory.add(item); }
+    public void inventoryRemove(Item item){ this.inventory.remove(item); }
 
     public double getMoneyAmount(){return(this.moneyAmount);}
     public void addMoney(double increase){this.moneyAmount = this.moneyAmount + increase;}
@@ -37,7 +37,7 @@ public class Player extends Person {
 
     void displayInventory(){
         System.out.println("Inventory:");
-        for (Item item : inventory) {
+        for (Item item : getInventory()) {
             System.out.println("- " + item.getName());
         }
 

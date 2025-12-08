@@ -1,8 +1,7 @@
 package envs;
 
-import core.Environment;
-import npcs.Bouncer;
-import npcs.StreetPerformer;
+import core.*;
+import npcs.*;
 
 public class FrontSidewalk extends Environment {
 
@@ -13,6 +12,24 @@ public class FrontSidewalk extends Environment {
         StreetPerformer streetPerformer = new StreetPerformer();
 
         addPeople(bouncer, streetPerformer);
+    }
+
+    public void watchStreetPerformer(Player player){
+        StreetPerformer found = null;
+        for (Person p : getPeople()){
+            if (p instanceof StreetPerformer){
+                found = (StreetPerformer) p;
+                break;
+            }
+        }
+
+        if (found == null){
+            System.out.println("There's no street performer here right now.");
+            return;
+        }
+
+        // Call the performer's method that announces/prints their act
+        found.getAct();
     }
 
 }
