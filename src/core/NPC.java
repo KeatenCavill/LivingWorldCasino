@@ -25,6 +25,8 @@ public class NPC extends Person {
         super.peeMeter = Math.random();
         this.anger = Math.random();
     }
+
+    public List<Item> getInventory(){return(this.inventory);}
     
     public void steal(int itemnum, Player player){
         player.inventoryAdd(this.inventory.get(itemnum));
