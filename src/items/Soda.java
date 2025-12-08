@@ -1,6 +1,6 @@
 package items;
-import core.Item;
-import core.Person;
+
+import core.*;
 
 
 public class Soda extends Item implements Consumable{
@@ -10,6 +10,7 @@ public class Soda extends Item implements Consumable{
 
     @Override
     public void consume(Person person){
+        if (person == null) return;
         person.changeThirst(-10);
         person.changePee(7);
         person.changeHappieness(20);

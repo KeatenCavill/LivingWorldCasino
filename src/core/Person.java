@@ -42,9 +42,54 @@ public class Person {
         Optional<Item> maybe = location.TakeItemByName(itemName);
         if (maybe.isPresent()){
             Item item = maybe.get();
+            // Add the item to this person's inventory
+            inventory.add(item);
             System.out.println(name + " picked up " + item.getName() + ".");
         } else {
             System.out.println("No " + itemName + " found here.");
+        }
+    }
+
+    /**
+     * Consume an item from this person's inventory by name. If the item is
+     * consumable it will apply its effects and be removed from inventory.
+     */
+    public void consumeItem(String itemName){
+        if (itemName == null) return;
+        String query = itemName.trim().toLowerCase();
+
+        Item found = null;
+        // first try exact match
+        for (Item it : new ArrayList<>(inventory)){
+            if (it.getName().equalsIgnoreCase(itemName)){
+                found = it;
+                break;
+            }
+        }
+
+        // then try contains
+        if (found == null){
+            for (Item it : new ArrayList<>(inventory)){
+                if (it.getName().toLowerCase().contains(query)){
+                    found = it;
+                    break;
+                }
+            }
+        }
+
+        if (found == null){
+            System.out.println("You don't have a '" + itemName + "' to consume.");
+            return;
+        }
+
+        // If the item implements items.Consumable, call its consume method.
+        if (found instanceof items.Consumable){
+            ((items.Consumable) found).consume(this);
+            // remove from inventory after consumption
+            inventory.remove(found);
+            System.out.println(found.getName() + " has been removed from your inventory.");
+        } else {
+            System.out.println("You can't consume " + found.getName() + ".");
         }
     }
     

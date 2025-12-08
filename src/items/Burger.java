@@ -1,7 +1,6 @@
 package items;
 
-import core.Item;
-import core.Person;
+import core.*;
 
 public class Burger extends Item implements Consumable{
     public Burger(){
@@ -10,6 +9,7 @@ public class Burger extends Item implements Consumable{
 
     @Override
     public void consume(Person person){
+        if (person == null) return;
         person.changeGrub(-20);
         person.changeHappieness(20);
         person.changeAwareness(5);

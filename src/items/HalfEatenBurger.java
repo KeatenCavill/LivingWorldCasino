@@ -1,7 +1,6 @@
 package items;
 
-import core.Item;
-import core.Person;
+import core.*;
 
 public class HalfEatenBurger extends Item implements Consumable {
     public HalfEatenBurger() {
@@ -14,6 +13,6 @@ public class HalfEatenBurger extends Item implements Consumable {
         person.changeGrub(-20);
         person.changeThirst(5);
         person.changeHappieness(-2);
-        System.out.println(person.name + " eats the half-eaten burger. It fills them up a bit.");
+        System.out.println(person.name + " eats the half-eaten burger. It fills them up a bit.... but why did you do that?");
     }
 }

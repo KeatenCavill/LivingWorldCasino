@@ -1,8 +1,6 @@
 package envs;
 
-import core.Environment;
-import core.Person;
-import core.Player;
+import core.*;
 
 public class Bathroom extends Environment {
 

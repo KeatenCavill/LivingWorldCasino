@@ -1,7 +1,6 @@
 package items;
 
-import core.Item;
-import core.Person;
+import core.*;
 
 public class WeirdPill extends Item implements Consumable {
 
@@ -11,6 +10,7 @@ public class WeirdPill extends Item implements Consumable {
 
     @Override
     public void consume(Person person) {
+        if (person == null) return;
         person.changeDrunk(30);
         person.changeGrub(-5);
         person.changePee(5);

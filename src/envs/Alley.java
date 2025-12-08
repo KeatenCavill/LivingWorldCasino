@@ -1,9 +1,7 @@
 package envs;
 
-import core.Environment;
-import core.Person;
+import core.*;
 import items.WeirdPill;
-import core.Player;
 import npcs.AlleyMan;
 
 public class Alley extends Environment {

@@ -1,11 +1,7 @@
 package envs;
 
-import core.Environment;
-import core.Person;
-import core.Player;
-import items.Burger;
-import items.Fries;
-import items.Soda;
+import core.*;
+import items.*;
 
 public class FoodCounter extends Environment {
 

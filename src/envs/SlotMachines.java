@@ -2,9 +2,7 @@ package envs;
 
 import java.util.Random;
 
-import core.Environment;
-import core.Person;
-import core.Player;
+import core.*;
 
 public class SlotMachines extends Environment {
 

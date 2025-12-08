@@ -1,7 +1,6 @@
 package items;
 
-import core.Item;
-import core.Person;
+import core.*;
 
 public class Beer extends Item implements Consumable {
     public Beer() {
