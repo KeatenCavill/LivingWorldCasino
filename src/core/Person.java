@@ -1,8 +1,5 @@
 package core;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import envs.*;
 
 public class Person {
@@ -90,7 +87,6 @@ public class Person {
         // If the item implements items.Consumable, call its consume method.
         if (found instanceof items.Consumable){
             ((items.Consumable) found).consume(this);
-            // remove from inventory after consumption
             inventory.remove(found);
             System.out.println(found.getName() + " has been removed from your inventory.");
         } else {
@@ -135,8 +131,8 @@ public class Person {
     public double getStealDifficulty(){
         double difficulty = 0;
         difficulty -= drunkMeter * 0.5;
-        difficulty += awareness * 0.3;
-        difficulty += aggression * 0.8;
+        difficulty += aggression * 0.3;
+        difficulty += awareness * 0.8;
         return clamp(difficulty, 0, 100);
     }
 

@@ -2,11 +2,15 @@ package envs;
 
 import core.*;
 import items.*;
+import npcs.Cook;
 
 public class FoodCounter extends Environment {
 
     public FoodCounter() {
         super("Food Counter", "You walk up to the food counter. It smells like fried everything.");
+        
+        Cook cook = new Cook();
+        addPerson(cook);
     }
 
     @Override
@@ -36,7 +40,7 @@ public class FoodCounter extends Environment {
         double price = 4.0;
         if (tryCharge(player, price)) {
             player.inventoryAdd(new Fries());
-            System.out.println("You buy fries for $" + price + ".");
+            System.out.println("You buy some fries for $" + price + ".");
         }
     }
 

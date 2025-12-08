@@ -49,6 +49,8 @@ public class DanceFloor extends Environment {
 
     public void listenToSinger(Player player){
         // Find the first Singer present in this environment
+        turnsOnFloor++;
+
         Singer found = null;
         for (Person p : getPeople()){
             if (p instanceof Singer){
