@@ -13,17 +13,11 @@ public class AlleyMan extends NPC implements Vendor {
     private List<Item> GoodsOp;
 
     private void makeGoodsOptions(){
-        HalfEatenBurger sketchyFood = new HalfEatenBurger();
-        WeirdPill drugs = new WeirdPill();
-        Beer beer = new Beer();
-        Shot shot = new Shot();
-        Soda soda = new Soda();
-        
-        this.GoodsOp.add(sketchyFood);
-        this.GoodsOp.add(drugs);
-        this.GoodsOp.add(beer);
-        this.GoodsOp.add(shot);
-        this.GoodsOp.add(soda);
+        HalfEatenBurger sketchyFood = new HalfEatenBurger(); this.GoodsOp.add(sketchyFood);
+        WeirdPill drugs = new WeirdPill(); this.GoodsOp.add(drugs);
+        Beer beer = new Beer(); this.GoodsOp.add(beer);
+        Shot shot = new Shot(); this.GoodsOp.add(shot);
+        Soda soda = new Soda(); this.GoodsOp.add(soda);
     };
 
     private void populateGoods(int numGoods){

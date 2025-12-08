@@ -12,6 +12,9 @@ public class Bartender extends NPC implements Vendor {
     private void populateGoods(){
         Beer beer = new Beer(); this.forSale.add(beer);
         Soda soda = new Soda(); this.forSale.add(soda);
+        Shot shot = new Shot(); this.forSale.add(shot);
+        Whiskey whiskey = new Whiskey(); this.forSale.add(whiskey);
+        Wine wine = new Wine(); this.forSale.add(wine);
     };
 
     public Bartender(){
@@ -27,7 +30,7 @@ public class Bartender extends NPC implements Vendor {
             inc ++;
         }
     }
-    
+
     public void buyItem(int item, Player player){
         int itemnum = item - 1;
         Item purchase = forSale.get(itemnum);
