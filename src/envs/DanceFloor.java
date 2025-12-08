@@ -2,7 +2,6 @@ package envs;
 
 import core.Environment;
 import core.Person;
-import core.NPC;
 import core.Player;
 import npcs.Singer;
 

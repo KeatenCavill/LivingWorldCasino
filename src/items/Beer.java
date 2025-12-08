@@ -10,11 +10,11 @@ public class Beer extends Item implements Consumable {
 
     @Override
     public void consume(Person person) {
-        person.changeDrunk(10);
-        person.changePee(5);
+        if (person == null) return;
+        person.changeDrunk(15);
+        person.changePee(7);
         person.changeGrub(-2);
-        person.changeAggression(3);
-        person.changeDrunk(10);
+        person.changeAggression(2);
         person.changeAwareness(-5);
         person.changeHappieness(5);
         System.out.println(person.name + " drinks the beer. Drunk level increased!");

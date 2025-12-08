@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import items.Consumable;
+
 
 public class Person {
     public String name;
@@ -21,7 +21,7 @@ public class Person {
     protected Environment location;
     protected final List<Item> inventory = new ArrayList<>();
 
-    private double clamp(double value, double min, double max){
+    public double clamp(double value, double min, double max){
         if (value<min) return min;
         if (value>max) return max;
         return value;
@@ -79,7 +79,7 @@ public class Person {
         double difficulty = 0;
         difficulty -= drunkMeter * 0.5;
         difficulty += awareness * 0.3;
-        difficulty += awareness * 0.8;
+        difficulty += aggression * 0.8;
         return clamp(difficulty, 0, 100);
     }
 

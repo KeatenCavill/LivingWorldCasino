@@ -1,9 +1,11 @@
 package envs;
 import core.Environment;
-import core.NPC;
 import core.Person;
 import core.Player;
 import items.Beer;
+import items.Wine;
+import items.Whiskey;
+import items.Shot;
 import npcs.Bartender;
 
 
@@ -35,6 +37,30 @@ public class Bar extends Environment {
         if (tryCharge(player, price)){
             player.inventoryAdd(new Beer());
             System.out.println("You bought a Beer for $" + price);
+        }
+    }
+
+    public void buyWine(Player player){
+        double price = 8.0;
+        if (tryCharge(player, price)){
+            player.inventoryAdd(new items.Wine());
+            System.out.println("You bought a Wine for $" + price);
+        }
+    }
+
+    public void buyWhiskey(Player player){
+        double price = 7.0;
+        if (tryCharge(player, price)){
+            player.inventoryAdd(new items.Whiskey());
+            System.out.println("You bought a Whiskey for $" + price);
+        }
+    }
+
+    public void buyShot(Player player){
+        double price = 4.0;
+        if (tryCharge(player, price)){
+            player.inventoryAdd(new items.Shot());
+            System.out.println("You bought a Shot for $" + price);
         }
     }
 }
