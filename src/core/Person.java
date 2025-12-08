@@ -21,6 +21,11 @@ public class Person {
     protected Environment location;
     protected final List<Item> inventory = new ArrayList<>();
 
+    public void move(Environment newlocation){
+        this.location = newlocation;
+    }
+    public Environment getLocation(){return(this.location)}
+
     public double clamp(double value, double min, double max){
         if (value<min) return min;
         if (value>max) return max;

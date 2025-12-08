@@ -5,6 +5,7 @@ import java.util.Random;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import npcs.Bouncer;
+import envs.FrontSidewalk;
 
 public class NPC extends Person {
 
@@ -36,7 +37,7 @@ public class NPC extends Person {
     public void give(Player player){
         int itemnum = (int)(Math.random() * this.inventory.size());
         Item item = this.inventory.get(itemnum);
-        // System.out.println("Here, take this " + item.getName() + ". You might need it.");
+        System.out.println("Here, take this " + item.getName() + ". You might need it.");
         player.inventoryAdd(item);
         inventory.remove(itemnum);
     }
@@ -46,7 +47,7 @@ public class NPC extends Person {
         System.out.println(this.phrases.get(messagenum));
     }
 
-    public void fight(Player player, Bouncer bouncer){
+    public void fight(Player player, Bouncer bouncer, FrontSidewalk frontSidewalk){
         if(super.peeMeter >= 0.75){
             System.out.println(super.name + ": \"I don't want to fight! I'm gonna pee myself!\"");
             System.out.println(super.name + " has run away in the direction of the bathroom.");
@@ -67,7 +68,7 @@ public class NPC extends Person {
                 System.out.println("They stole $" + reward + " out of your wallet.");
                 player.addMoney(-1 * reward);
             }
-            if(noticed > 0.9){bouncer.kickOut();}
+            if(noticed > 0.9){bouncer.kickOut(player, frontSidewalk);}
         }
     }
 
