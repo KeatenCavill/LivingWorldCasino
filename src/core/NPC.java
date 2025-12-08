@@ -13,6 +13,7 @@ public class NPC extends Person {
     protected double anger;
 
     public NPC(){
+        super("Default Name", 0); // Replace with appropriate arguments for the Person constructor
         try {
             List<String> lines = Files.readAllLines(Path.of("names.txt"));
             super.name = lines.get(new Random().nextInt(lines.size()));

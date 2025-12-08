@@ -6,9 +6,7 @@ import core.Person;
 public class WeirdPill extends Item implements Consumable {
 
     public WeirdPill() {
-        this.name = "Weird Pill";
-        this.description = "A sketchy pill you got in the alley. Probably a bad idea.";
-        this.monetaryValue = 0.0;
+        super("Weird Pill", "A sketchy pill you got in the alley. Probably a bad idea.", 0.0);
     }
 
     @Override
@@ -17,7 +15,7 @@ public class WeirdPill extends Item implements Consumable {
         person.changeGrub(-5);
         person.changePee(5);
 
-        person.changeHappiness(50);
+        person.changeHappieness(50);
         person.changeAggression(1);
         person.changeAwareness(-40); //this person... is gunna be fucked up for a bit
         System.out.println(person.name + " takes the weird pill. Reality feels strange...");

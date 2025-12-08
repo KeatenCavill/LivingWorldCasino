@@ -9,14 +9,12 @@ import npcs.StreetPerformer;
 public class FrontSidewalk extends Environment {
 
     public FrontSidewalk() {
-        this.name = "Front Sidewalk";
-        this.entranceMessage = "You step out onto the sidewalk in front of the casino.";
+        super("Front Sidewalk", "You step out onto the sidewalk in front of the casino.");
 
         Bouncer bouncer = new Bouncer();
         StreetPerformer streetPerformer = new StreetPerformer();
 
-
-        this.people = new NPC[] { bouncer, streetPerformer };
+        addPeople(bouncer, streetPerformer);
     }
 
 }

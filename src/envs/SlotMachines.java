@@ -11,8 +11,7 @@ public class SlotMachines extends Environment {
     private Random random = new Random();
 
     public SlotMachines() {
-        this.name = "Slot Machines";
-        this.entranceMessage = "You enter the slot machine area. Lights flash everywhere. It fells like you wallet was lit on fire";
+        super("Slot Machines", "You enter the slot machine area. Lights flash everywhere. It feels like your wallet was lit on fire");
     }
 
     @Override
