@@ -18,6 +18,11 @@ public class Person {
     protected Environment location;
     protected final List<Item> inventory = new ArrayList<>();
 
+    public void move(Environment newlocation){
+        this.location = newlocation;
+    }
+    public Environment getLocation(){return(this.location);}
+
     public double clamp(double value, double min, double max){
         if (value<min) return min;
         if (value>max) return max;
@@ -137,6 +142,6 @@ public class Person {
         chance += drunkMeter * 0.6;
         chance += aggression * 0.7;
         chance -= happiness * 0.4;
-        return (int) clamp(chance, 0, 100);
+        return (double)(clamp(chance, 0, 100));
     }
 }

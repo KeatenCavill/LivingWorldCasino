@@ -5,6 +5,7 @@ import java.util.Random;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import npcs.Bouncer;
+import envs.FrontSidewalk;
 
 public class NPC extends Person {
 
@@ -29,14 +30,20 @@ public class NPC extends Person {
     public List<Item> getInventory(){return(this.inventory);}
     
     public void steal(int itemnum, Player player){
-        player.inventoryAdd(this.inventory.get(itemnum));
-        inventory.remove(itemnum);
+        if(super.getStealDifficulty() < Math.random()){
+            player.inventoryAdd(this.inventory.get(itemnum));
+            this.inventory.remove(itemnum);
+        } else {
+            System.out.println(super.name + ": \"Hey! What are you doing?\"");
+            System.out.println("You quickly flee.");
+            this.anger = clamp(this.anger + 0.1, 0, 1);
+        }
     }
 
     public void give(Player player){
         int itemnum = (int)(Math.random() * this.inventory.size());
         Item item = this.inventory.get(itemnum);
-        // System.out.println("Here, take this " + item.getName() + ". You might need it.");
+        System.out.println("Here, take this " + item.getName() + ". You might need it.");
         player.inventoryAdd(item);
         inventory.remove(itemnum);
     }
@@ -46,14 +53,14 @@ public class NPC extends Person {
         System.out.println(this.phrases.get(messagenum));
     }
 
-    public void fight(Player player, Bouncer bouncer){
+    public void fight(Player player, Bouncer bouncer, FrontSidewalk frontSidewalk){
         if(super.peeMeter >= 0.75){
             System.out.println(super.name + ": \"I don't want to fight! I'm gonna pee myself!\"");
             System.out.println(super.name + " has run away in the direction of the bathroom.");
             super.relieveOneSelf();
         } else if(super.drunkMeter >= 0.5){
             System.out.println(super.name + " swings at you but misses and faceplants on the ground. Their friend calls them an Uber home.");
-        } else if(this.anger >= -.5){
+        } else if(this.anger >= super.getFightLikelihood()){
             System.out.println("You and " + super.name + " get into a big fight!");
             double noticed = Math.random();
             double win = Math.random();
@@ -67,7 +74,14 @@ public class NPC extends Person {
                 System.out.println("They stole $" + reward + " out of your wallet.");
                 player.addMoney(-1 * reward);
             }
-            if(noticed > 0.9){bouncer.kickOut();}
+            if(noticed > 0.9){bouncer.kickOut(player, frontSidewalk);}
+        } else {
+            System.out.println(super.name + " gives you a weird look.");
+            System.out.println(super.name + ": \"I'm not gonna fight you. Weirdo.\"");
+            System.out.println("They leave the room.");
+            int locNum = (int)(Math.random() * getLocation().getConnectedAreas().size());
+            Environment newLoc = getLocation().getConnectedAreas().get(locNum);
+            super.move(newLoc);
         }
     }
 

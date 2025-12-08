@@ -76,9 +76,11 @@ public class Singer extends NPC {
         double theftAmount = Math.random() * this.earnings;
         if(theftAmount == 0){
             System.out.println(super.name + " didn't have any money for you to steal!");
-        } else {
+        } else if(super.getStealDifficulty() < Math.random()){
             System.out.println("You shove your hand into " + super.name + "'s tip jar when they aren't looking and make out with $" + theftAmount + ".");
             System.out.println("Shame on you!");
+        } else {
+            System.out.println(super.name + " never looked away long enough for you to snatch anything. They were staring right. At you.");
         }
     }
 

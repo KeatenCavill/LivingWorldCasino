@@ -1,6 +1,7 @@
 package npcs;
 import core.NPC;
 import core.Player;
+import envs.FrontSidewalk;
 
 
 public class Bouncer extends NPC {
@@ -23,12 +24,12 @@ public class Bouncer extends NPC {
         }
     }
 
-    public void kickOut(){
+    public void kickOut(Player player, FrontSidewalk frontSidewalk){
         if(!bribed){
             this.kicked = true;
             System.out.println(super.name + " grabs you by the back of the shirt and hauls you outside!");
             System.out.println(super.name + ": \"And stay out!\"");
-            // NEED A WAY TO ACTUALLY MOVE THE PLAYER'S POSITION
+            player.move(frontSidewalk);
         } else {
             System.out.println(super.name + ": \"I'll let you off this time, but this is your last warning!\"");
             this.bribed = false;
