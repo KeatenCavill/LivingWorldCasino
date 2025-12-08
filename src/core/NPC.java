@@ -54,7 +54,7 @@ public class NPC extends Person {
             super.relieveOneSelf();
         } else if(super.drunkMeter >= 0.5){
             System.out.println(super.name + " swings at you but misses and faceplants on the ground. Their friend calls them an Uber home.");
-        } else if(this.anger >= -.5){
+        } else if(this.anger >= super.getFightLikelihood()){
             System.out.println("You and " + super.name + " get into a big fight!");
             double noticed = Math.random();
             double win = Math.random();
@@ -69,6 +69,13 @@ public class NPC extends Person {
                 player.addMoney(-1 * reward);
             }
             if(noticed > 0.9){bouncer.kickOut(player, frontSidewalk);}
+        } else {
+            System.out.println(super.name + " gives you a weird look.");
+            System.out.println(super.name + ": \"I'm not gonna fight you. Weirdo.\"");
+            System.out.println("They walk away from you without issue.");
+            int locNum = (int)(Math.random() * getLocation().getConnectedAreas().size());
+            Environment newLoc = getLocation().getConnectedAreas().get(locNum);
+            super.move(newLoc);
         }
     }
 
