@@ -72,7 +72,7 @@ public class NPC extends Person {
         } else {
             System.out.println(super.name + " gives you a weird look.");
             System.out.println(super.name + ": \"I'm not gonna fight you. Weirdo.\"");
-            System.out.println("They walk away from you without issue.");
+            System.out.println("They leave the room.");
             int locNum = (int)(Math.random() * getLocation().getConnectedAreas().size());
             Environment newLoc = getLocation().getConnectedAreas().get(locNum);
             super.move(newLoc);
