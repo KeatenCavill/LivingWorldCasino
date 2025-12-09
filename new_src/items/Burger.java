@@ -11,7 +11,7 @@ public class Burger extends Item implements Consumable{
     public void consume(Person person){
         if (person == null) return;
         person.changeGrub(-20);
-        System.out.println(person.name + " eats the burger. Hunger decreased!");
+        System.out.println(person.getName() + " eats the burger. Hunger decreased!");
 
     }
 }

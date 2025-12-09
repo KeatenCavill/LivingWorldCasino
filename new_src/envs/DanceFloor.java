@@ -1,0 +1,70 @@
+package envs;
+
+import core.*;
+import npcs.Singer;
+
+public class DanceFloor extends Environment {
+
+    private int turnsOnFloor = 0;
+
+    public DanceFloor() {
+        super("Dance Floor", "You step onto the pulsing dance floor.");
+        
+        Singer singer = new Singer();
+        addPerson(singer);
+    }
+
+    @Override
+    public void enter(Person person) {
+        super.enter(person);
+        turnsOnFloor = 0;
+    }
+
+    @Override
+    public void stay(Person person) {
+        turnsOnFloor++;
+
+        if (turnsOnFloor <= 5) {
+            // early: fun
+            person.changeHappieness(4);
+            person.changeGrub(1);
+            System.out.println("You dance and feel great!");
+        } else if (turnsOnFloor <= 10) {
+            // still fun but tiring
+            person.changeHappieness(1);
+            person.changeGrub(2);
+            System.out.println("You're getting a bit sweaty from all the dancing.");
+        } else {
+            // too long: tired
+            person.changeHappieness(-5);
+            person.changeGrub(3);
+            System.out.println("You're exhausted from dancing so long.");
+        }
+    }
+
+    @Override
+    public void leave(Person person) {
+        turnsOnFloor = 0;
+    }
+
+    public void listenToSinger(Player player){
+        // Find the first Singer present in this environment
+        turnsOnFloor++;
+
+        Singer found = null;
+        for (Person p : getPeople()){
+            if (p instanceof Singer){
+                found = (Singer) p;
+                break;
+            }
+        }
+
+        if (found == null){
+            System.out.println("There's no singer here right now.");
+            return;
+        }
+
+        // Let the singer announce what they're playing (method also prints)
+        found.getSong();
+    }
+}

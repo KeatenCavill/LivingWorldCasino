@@ -1,16 +1,14 @@
 package userinterface;
 
 import core.Environment;
-
 import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class UserIO {
     
 
-    static List<String> commands = List.of("status","back","help");
+    static List<String> commands = List.of("status","inventory","back","help");
 
 
     static void input(Scanner inStream,Environment env){
@@ -28,7 +26,7 @@ public class UserIO {
                     validInput = true;
                 }
                 else if (options.contains(input)){
-
+                    input(inStream,)
                     validInput = true;
                 }
                 else {
@@ -41,12 +39,5 @@ public class UserIO {
                 validInput = false;
             }
         }
-
-        switch (input){
-            
-
-        }
-
     }
-
 }

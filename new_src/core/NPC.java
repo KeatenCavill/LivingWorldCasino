@@ -1,20 +1,36 @@
 package core;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import npcs.Bouncer;
 import envs.FrontSidewalk;
 
+
 public class NPC extends Person {
+
+    protected double anger = 0.0;
+
+    protected List<String> phrases;
+
+    public NPC() {
+        super("Stranger", 30, new int[] { 0, 0, 50, 50 }, new ArrayList<Item>());
+        this.anger = 0.0;
+        this.phrases = new ArrayList<>();
+        this.phrases.add(this.name + " nods at you.");
+        this.phrases.add("\"Hey there,\" says " + this.name + ".");
+    }
 
     public NPC(String name,int age,int[] startingMeters,List<Item> startingInventory){
         super(name,age,startingMeters,startingInventory);
+        this.anger = 0.0;
+        this.phrases = new ArrayList<>();
+        this.phrases.add(this.name + " looks at you.");
+        this.phrases.add("\"What's up?\" says " + this.name + ".");
     }
 
-    public List<Item> getInventory(){ return(this.inventory); }
-    
     public void steal(int itemnum, Player player){
         if(super.getStealDifficulty() < Math.random()){
             player.inventoryAdd(this.inventory.get(itemnum));

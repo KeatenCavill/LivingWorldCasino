@@ -1,147 +1,50 @@
 package core;
-import java.util.*;
-import envs.*;
+
+import java.util.List;
+
 
 public class Person {
-    public String name;
-    public int age;
 
-    protected double peeMeter;
-    protected double drunkMeter;
-    protected double grubMeter;
-    protected double thirstMeter;
+    protected String name;
+    protected int age;
 
-    protected double happiness;
-    protected double aggression;
-    protected double awareness;
+    protected int peeMeter;
+    protected int drunkMeter;
+    protected int grubMeter;
+    protected int thirstMeter;
 
-    protected Environment location;
-    protected final List<Item> inventory = new ArrayList<>();
+    protected List<Item> inventory;
 
-    public void move(Environment newlocation){
-        this.location = newlocation;
-    }
-    public Environment getLocation(){return(this.location);}
-
-    public double clamp(double value, double min, double max){
-        if (value<min) return min;
-        if (value>max) return max;
-        return value;
-    }
-
-    public Person(String name, int age){
+    public Person(String name,int age,int[] startingMeters, List<Item> startingInventory){
         this.name = name;
         this.age = age;
+
+        this.peeMeter = startingMeters[0];
+        this.drunkMeter = startingMeters[1];
+        this.grubMeter = startingMeters[2];
+        this.thirstMeter = startingMeters[3];
+
+        this.inventory = startingInventory;
     }
 
-    void setLocation(Environment env){
-        this.location = env;
-    }
+    public String getName(){ return this.name; }
+    public int getAge(){ return this.age; }
 
-    public void pickUp(String itemName){
-        if (location == null) return;
+    public int getPeeMeter(){ return this.peeMeter; }
+    public int getDrunkMeter(){ return this.drunkMeter; }
+    public int getGrubMeter(){ return this.grubMeter; }
+    public int getThirstMeter(){ return this.thirstMeter; }
 
-        Optional<Item> maybe = location.TakeItemByName(itemName);
-        if (maybe.isPresent()){
-            Item item = maybe.get();
-            // Add the item to this person's inventory
-            inventory.add(item);
-            System.out.println(name + " picked up " + item.getName() + ".");
-        } else {
-            System.out.println("No " + itemName + " found here.");
-        }
-    }
+    public List<Item> getInventory(){ return this.inventory; }
 
-    /**
-     * Consume an item from this person's inventory by name. If the item is
-     * consumable it will apply its effects and be removed from inventory.
-     */
-    public void consumeItem(String itemName){
-        if (itemName == null) return;
-        String query = itemName.trim().toLowerCase();
-
-        Item found = null;
-        // first try exact match
-        for (Item it : new ArrayList<>(inventory)){
-            if (it.getName().equalsIgnoreCase(itemName)){
-                found = it;
-                break;
-            }
-        }
-
-        // then try contains
-        if (found == null){
-            for (Item it : new ArrayList<>(inventory)){
-                if (it.getName().toLowerCase().contains(query)){
-                    found = it;
-                    break;
-                }
-            }
-        }
-
-        if (found == null){
-            System.out.println("You don't have a '" + itemName + "' to consume.");
-            return;
-        }
-
-        // If the item implements items.Consumable, call its consume method.
-        if (found instanceof items.Consumable){
-            ((items.Consumable) found).consume(this);
-            inventory.remove(found);
-            System.out.println(found.getName() + " has been removed from your inventory.");
-        } else {
-            System.out.println("You can't consume " + found.getName() + ".");
-        }
-    }
+    public void changeDrunk(int delta){ this.drunkMeter = clamp(this.drunkMeter + delta); }
+    public void changePee(int delta){ this.peeMeter = clamp(this.peeMeter + delta); }
+    public void changeGrub(int delta) { this.grubMeter = clamp(this.grubMeter + delta); }
+    public void changeThirst(int delta) { this.thirstMeter = clamp(this.thirstMeter + delta); }
     
-
-    public void changeDrunk(double delta) { drunkMeter = clamp(drunkMeter + delta, 0, 100); }
-    public void changePee(double delta) { peeMeter = clamp(peeMeter + delta, 0, 100); }
-    public void changeGrub(double delta) { grubMeter = clamp(grubMeter + delta, 0, 100); }
-    public void changeThirst(double delta) { thirstMeter = clamp(thirstMeter + delta, 0, 100); }
-
-    public void changeHappieness(double delta) { happiness = (int) clamp(happiness + delta, 0, 100); }
-    public void changeAggression(double delta) { aggression = (int) clamp(aggression + delta, 0, 100); }
-    public void changeAwareness(double delta) { awareness = (int) clamp(awareness + delta, 0, 100); }
-
-    public List<Item> getInventory(){
-     return Collections.unmodifiableList(inventory); 
-    }
-    
-    public void relieveOneSelf(){
-        if(this.location instanceof Bathroom){
-            this.peeMeter = 0;
-            System.out.println(this.name + " has relieved themselves.");
-        } else if(this.location instanceof Alley || this.location instanceof FrontSidewalk){
-            this.peeMeter = 0;
-            System.out.println(this.name + " has relieved themselves.");
-        } else {
-            System.out.println(this.name + "has tried to relieve themselves in the " + this.location + ".");
-            System.out.println("A passersby yelled at them: \"Ew! You can't do that here!\"");}
-        }
-
-    public double getPeeMeter(){ return peeMeter; }
-    public double getDrunkMeter(){ return drunkMeter; }
-    public double getGrubMeter(){ return grubMeter; }
-    public double getThirstMeter(){ return thirstMeter; }
-    public double getHappiness(){ return happiness; }
-    public double getAggression(){ return aggression; }
-    public double getAwareness(){ return awareness; }
-
-    public double getStealDifficulty(){
-        double difficulty = 0;
-        difficulty -= drunkMeter * 0.5;
-        difficulty += aggression * 0.3;
-        difficulty += awareness * 0.8;
-        return clamp(difficulty, 0, 100);
-    }
-
-    public double getFightLikelihood(){
-        double chance = 0;
-
-        chance += drunkMeter * 0.6;
-        chance += aggression * 0.7;
-        chance -= happiness * 0.4;
-        return (double)(clamp(chance, 0, 100));
+     private static int clamp(int value){
+        if (value<0) return 0;
+        if (value>100) return 100;
+        return value;
     }
 }

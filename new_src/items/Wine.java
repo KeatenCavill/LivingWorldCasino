@@ -12,6 +12,6 @@ public class Wine extends Item implements Consumable {
         if (person == null) return;
         person.changeDrunk(20);
         person.changePee(6);
-        System.out.println(person.name + " sips the wine. A pleasant warmth spreads through them.");
+        System.out.println(person.getName() + " sips the wine. A pleasant warmth spreads through them.");
     }
 }
